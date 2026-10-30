@@ -1,0 +1,288 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+html {
+  font-family: "Josefin";
+  font-size: 18px;
+}
+
+input, button {
+  font-family: "Josefin";
+  background-color: transparent;
+  border: none;
+}
+
+img {
+  display: block;
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+:root {
+  --main-background-color: hsl(235, 21%, 11%);
+  --container-background-color: hsl(235, 24%, 19%);
+  --main-color: hsl(234, 39%, 85%);
+  --complete-color: hsl(233, 14%, 35%);
+  --border-color: hsl(237, 14%, 26%);
+  --footer-color: hsl(234, 11%, 52%);
+  --hover-color: hsl(236, 33%, 92%);
+  --background-desktop-image: url(./images/bg-desktop-dark.jpg);
+  --background-mobile-image: url(./images/bg-mobile-dark.jpg);
+  --main-padding: 25px;
+  --main-gap: 20px;
+}
+:root.light {
+  --main-background-color: hsl(0, 0%, 95%);
+  --container-background-color: hsl(0, 0%, 98%);
+  --main-color: hsl(235, 19%, 35%);
+  --complete-color: hsl(233, 11%, 84%);
+  --border-color: hsl(233, 11%, 84%);
+  --footer-color: hsl(236, 9%, 61%);
+  --hover-color: hsl(235, 19%, 35%);
+  --background-desktop-image: url(./images/bg-desktop-light.jpg);
+  --background-mobile-image: url(./images/bg-mobile-light.jpg);
+}
+@media only screen and (max-width: 500px) {
+  :root {
+    --main-padding: 18px;
+    --main-gap: 15px ;
+  }
+}
+
+@font-face {
+  font-family: "Josefin";
+  src: url(./font/Josefin_Sans/JosefinSans-VariableFont_wght.ttf);
+}
+.main {
+  min-height: 100vh;
+  background-color: var(--main-background-color);
+  background-image: var(--background-desktop-image);
+  background-size: 100% 320px;
+  background-repeat: no-repeat;
+  background-position: top center;
+  padding: 60px 20px 20px;
+}
+@media only screen and (max-width: 500px) {
+  .main {
+    background-image: var(--background-mobile-image);
+  }
+}
+.main__container {
+  max-width: 600px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.main__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main__title {
+  font-size: 2.5rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+}
+@media only screen and (max-width: 500px) {
+  .main__title {
+    font-size: 2.2rem;
+  }
+}
+.main__themeSwitcher {
+  display: flex;
+  cursor: pointer;
+}
+.main__themeSwitcher #sun {
+  display: block;
+}
+.main__themeSwitcher #moon {
+  display: none;
+}
+.main__themeSwitcher.light #sun {
+  display: none;
+}
+.main__themeSwitcher.light #moon {
+  display: block;
+}
+.main__inputGrp {
+  height: 55px;
+  background-color: var(--container-background-color);
+  padding: 0 var(--main-padding);
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 4px;
+  transition: transform 0.3s ease-in-out;
+}
+.main__inputGrp:has(input:focus) {
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  transform: scale(1.02);
+}
+.main__inputGrp__circle {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+}
+.main__inputGrp__field {
+  font-size: 0.9rem;
+  color: var(--main-color);
+  height: 60%;
+  flex: 1;
+  outline: none;
+  margin-top: 2px;
+}
+.main__inputGrp__field::-moz-placeholder {
+  color: var(--footer-color);
+}
+.main__inputGrp__field::placeholder {
+  color: var(--footer-color);
+}
+.main__content {
+  background-color: var(--container-background-color);
+  border-radius: 4px;
+  color: var(--main-color);
+}
+.main__item {
+  height: 55px;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 var(--main-padding);
+  display: flex;
+  align-items: center;
+}
+.main__item.selected .main__item__circle::before {
+  border: none;
+  background-image: url(./images/icon-check.svg), linear-gradient(to right bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.main__item.selected .main__item__circle::after {
+  opacity: 0;
+}
+.main__item.selected .main__item__task {
+  color: var(--complete-color);
+  -webkit-text-decoration: 1.4px var(--complete-color) line-through;
+          text-decoration: 1.4px var(--complete-color) line-through;
+}
+.main__item__content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+.main__item__content:hover div::before {
+  border: none;
+}
+.main__item__content:hover div::after {
+  opacity: 1;
+}
+.main__item__content:hover img {
+  width: 20px;
+  height: 20px;
+}
+.main__item__circle {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  position: relative;
+}
+.main__item__circle::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--container-background-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 2px solid var(--border-color);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 999;
+}
+.main__item__circle::after {
+  content: "";
+  width: 24.4px;
+  height: 24.4px;
+  background-image: linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 666;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+.main__item__task {
+  font-size: 0.9rem;
+  margin-top: 3px;
+}
+.main__item__delete {
+  margin-left: auto;
+  width: 0;
+  height: 0;
+  transition: 0.3s ease-in-out;
+}
+.main__footer {
+  font-size: 0.8rem;
+  height: 50px;
+  color: var(--footer-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--main-padding);
+}
+.main__footer__filterGrp {
+  display: flex;
+  gap: 10px;
+}
+.main__footer__filterItem {
+  font-size: 0.8rem;
+  color: var(--footer-color);
+  font-weight: 600;
+  cursor: pointer;
+}
+.main__footer__filterItem:hover {
+  color: var(--hover-color);
+}
+.main__footer__filterItem:has(input:checked) {
+  color: hsl(220, 98%, 61%);
+}
+.main__footer__clearCompleted {
+  color: var(--footer-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.main__footer__clearCompleted:hover {
+  color: var(--hover-color);
+}
+.main__outside {
+  background-color: var(--container-background-color);
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+@media only screen and (min-width: 500px) {
+  .main__outside {
+    display: none;
+  }
+}/*# sourceMappingURL=style.css.map */

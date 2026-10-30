@@ -1,0 +1,30 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+html {
+    font-family: "Josefin";
+    font-size: 18px;
+}
+
+input, button {
+    font-family: "Josefin";
+    background-color: transparent;
+    border: none;
+}
+
+img {
+    display: block;
+}
+
+.dragging {
+    opacity: 0.5;
+}

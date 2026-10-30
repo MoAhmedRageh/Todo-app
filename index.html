@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Todo App</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="shortcut icon" href="images/favicon-32x32.png" type="image/x-icon">
+    </head>
+    <body>
+        <main class="main">
+            <div class="main__container">
+                <div class="main__header">
+                    <h1 class="main__title">Todo</h1>
+                    <div class="main__themeSwitcher" id="theme-switcher" tabindex="0">
+                        <img src="./images/icon-sun.svg" alt="Sun Icon to indiate that the mode of the app can be switched to light" id="sun">
+                        <img src="./images/icon-moon.svg" alt="Moon Icon to indiate that the mode of the app can be switched to dark" id="moon">
+                    </div>
+                </div>
+
+                <div class="main__inputGrp">
+                    <div class="main__inputGrp__circle"></div>
+                    <input type="text" placeholder="Create a new todo..." autofocus class="main__inputGrp__field" id="input-field">
+                </div>
+
+                <div class="main__content">
+                    <ul class="main__list" id="list-container"></ul>
+
+                    <div class="main__footer" id="footer">
+                        <p class="main__footer__itemsLeft" id="items-left"></p>
+                        <div class="main__footer__filterGrp" id="filter-grp">
+                            <label for="all" class="main__footer__filterItem" data-filter="all" tabindex="0">All<input type="radio" name="filter" id="all" hidden checked></label>
+                            <label for="active" class="main__footer__filterItem" data-filter="active" tabindex="0">Active<input type="radio" name="filter" id="active" hidden></label>
+                            <label for="completed" class="main__footer__filterItem" data-filter="complete" tabindex="0">Completed<input type="radio" name="filter" id="completed" hidden></label>
+                        </div>
+                        <button type="button" class="main__footer__clearCompleted" id="clear-completed">Clear Completed</button>
+                    </div>
+                </div>
+
+                <div class="main__outside" id="outside"></div>
+            </div>
+        </main>
+        <script src="main.js"></script>
+    </body>
+</html>
